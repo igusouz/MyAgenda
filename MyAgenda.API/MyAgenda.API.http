@@ -1,0 +1,6 @@
+@MyAgenda.API_HostAddress = http://localhost:5038
+
+GET {{MyAgenda.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

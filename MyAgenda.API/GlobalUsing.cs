@@ -1,0 +1,12 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using MyAgenda.API.Domain.Entities;
+global using MyAgenda.API.Infrastructure.Persistence;
+global using MyAgenda.API.Application.DTOs;
+global using AutoMapper;
+global using FluentValidation;
+global using MyAgenda.API.Infrastructure.Repositories;
+global using Microsoft.AspNetCore.Mvc;
+global using MyAgenda.API.Application.Services;
+global using FluentValidation.AspNetCore;
+global using MyAgenda.API.Application.Mappings;
+global using MyAgenda.API.Application.Validators;
