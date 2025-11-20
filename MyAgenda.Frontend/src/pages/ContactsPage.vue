@@ -1,49 +1,76 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import CreateContactForm from "../components/contacts/CreateContactForm.vue";
-import EditContactForm from "../components/contacts/EditContactForm.vue";
+import ContactForm from "../components/contacts/ContactForm.vue";
 import ContactList from "../components/contacts/ContactList.vue";
-import { api } from "../api/http"
+import { getContacts } from "../api/contactsService";
 
 const contacts = ref([]);
-const showCreateModal = ref(false);
-const showEditModal = ref(false);
+const showModal = ref(false);
 const selectedContact = ref(null);
+const isLoading = ref(false);
 
 const loadContacts = async () => {
-  const res = await api.get("/contacts");
-  contacts.value = res.data;
+  isLoading.value = true;
+  try {
+    const res = await getContacts();
+    contacts.value = res.data;
+  } catch (err) {
+    console.error("Erro ao carregar contatos:", err);
+  } finally {
+    isLoading.value = false;
+  }
 };
 
-const openCreate = () => showCreateModal.value = true;
+const openCreate = () => {
+  selectedContact.value = null;
+  showModal.value = true;
+};
+
 const openEdit = (contact) => {
   selectedContact.value = contact;
-  showEditModal.value = true;
+  showModal.value = true;
 };
 
 onMounted(loadContacts);
 </script>
 
 <template>
-  <h1>MyAgenda</h1>
-  <button @click="openCreate">Novo Contato</button>
+  <div class="min-h-screen bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
 
-  <ContactList 
-    :contacts="contacts" 
-    @edit="openEdit" 
-    @deleted="loadContacts"
-  />
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">📒 MyAgenda</h1>
+        <button
+          @click="openCreate"
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          Novo Contato
+        </button>
+      </div>
 
-  <CreateContactForm 
-    v-if="showCreateModal" 
-    @close="showCreateModal = false" 
-    @created="loadContacts"
-  />
+      <!-- Loading -->
+      <div v-if="isLoading" class="text-center py-4 text-gray-500">
+        Carregando contatos...
+      </div>
 
-  <EditContactForm 
-    v-if="showEditModal" 
-    :contact="selectedContact" 
-    @close="showEditModal = false" 
-    @updated="loadContacts"
-  />
+      <!-- Lista de contatos -->
+      <div class="overflow-y-auto max-h-[70vh] w-full">
+        <ContactList
+          :contacts="contacts"
+          @edit="openEdit"
+          @deleted="loadContacts"
+        />
+      </div>
+    </div>
+
+    <!-- Modal de criação/edição -->
+    <ContactForm
+      v-if="showModal"
+      :contact="selectedContact"
+      @close="showModal = false"
+      @created="loadContacts"
+      @updated="loadContacts"
+    />
+  </div>
 </template>
