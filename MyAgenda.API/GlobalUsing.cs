@@ -10,3 +10,4 @@ global using MyAgenda.API.Application.Services;
 global using FluentValidation.AspNetCore;
 global using MyAgenda.API.Application.Mappings;
 global using MyAgenda.API.Application.Validators;
+global using MyAgenda.API.Middleware;
