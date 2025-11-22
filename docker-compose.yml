@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  myagenda-api:
+    build:
+      context: ./MyAgenda.API
+      dockerfile: Dockerfile
+    container_name: myagenda-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - sqlite_data:/app
+    networks:
+      - myagenda-net
+
+  myagenda-front:
+    build:
+      context: ./MyAgenda.Frontend
+      dockerfile: Dockerfile
+    container_name: myagenda-front
+    
+    ports:
+      - "80:80"
+
+    networks:
+      - myagenda-net
+    depends_on:
+      - myagenda-api
+
+networks:
+  myagenda-net:
+
+volumes:
+  sqlite_data:

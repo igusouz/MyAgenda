@@ -8,7 +8,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowVueDev", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5173")
+            .WithOrigins(
+                "http://localhost:5173",
+                "http://myagenda-front",
+                "http://localhost"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -46,6 +50,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// migrations at docker container startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AgendaDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
 
