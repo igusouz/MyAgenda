@@ -1,7 +1,7 @@
 # 📒 MyAgenda - .NET API with Vue.JS
 
 MyAgenda is a simple and efficient scheduling application designed to help users manage appointments, contacts, and daily tasks.
-This project was built with a modern full-stack architecture, using reliable and scalable technologies on both backend and frontend.
+This project was built with a modern full-stack architecture, using reliable and scalable technologies on both the backend and frontend.
 
 
 ### 🛠️ Technologies Used
@@ -17,35 +17,23 @@ The backend of MyAgenda was developed using .NET, providing a robust structure f
 #### Frontend — Vue.js
 
 The frontend was built with Vue.js, focusing on clean UI and responsive interactions.
-- Axios to communicate with backend
-- Tailwind-css to optimize our design
-- Router to better routing through pages
+- Axios to communicate with the backend
+- Tailwind CSS to improve the design workflow
+- Vue Router for better page navigation
 
-#### Turorials to run it
+#### 🚀 To run it Docker
 
-###### To run it separete:
+*Make sure your docker desktop is up and running*
 
-On *_MyAgenda\MyAgenda.API_*
+In *_MyAgenda_/*
+
 ```md
-dotnet run
+docker compose build
 ```
-It will be avaliable on http://localhost:5038/swagger/index.html
-
-On *_MyAgenda\MyAgenda.Frontend_*
+Then:
 ```md
-npm install
+docker compose up
 ```
-Then go by
-```md
-npm run dev
-```
-It will be avaliable on http://localhost:5173/contacs
+*_MyAgenda\MyAgenda.API_* will be available at http://localhost:8080/swagger/index.html
 
-###### To run by docker:
-On *_MyAgenda_/*
-```md
-docker compose up --build
-```
-*_MyAgenda\MyAgenda.API_* will be avaliable on http://localhost:8080/index.html
-
-*_MyAgenda\MyAgenda.Fronted_* will be avaliable on http://localhost:3000
+*_MyAgenda\MyAgenda.Fronted_* will be available at http://localhost/contacts
