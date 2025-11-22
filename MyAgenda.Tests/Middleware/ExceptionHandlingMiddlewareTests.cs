@@ -10,7 +10,6 @@ namespace MyAgenda.Tests.Middleware
         [Fact]
         public async Task Middleware_ShouldReturn500_WhenExceptionIsThrown()
         {
-            // Arrange
             var loggerMock = new Mock<ILogger<ExceptionMiddleware>>();
 
             var next = new RequestDelegate(_ => throw new Exception("Test exception"));
@@ -19,21 +18,17 @@ namespace MyAgenda.Tests.Middleware
             var context = new DefaultHttpContext();
             context.Response.Body = new MemoryStream();
 
-            // Act
             await middleware.InvokeAsync(context);
 
-            // Assert status + content type
             Assert.Equal(StatusCodes.Status500InternalServerError, context.Response.StatusCode);
             Assert.Equal("application/json", context.Response.ContentType);
 
-            // Assert JSON returned
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             var json = await new StreamReader(context.Response.Body).ReadToEndAsync();
 
             Assert.Contains("\"title\":\"Internal server error\"", json);
             Assert.Contains("\"detail\":\"Test exception\"", json);
 
-            // Assert logging: VERIFICATION CORRETA DO ILogger.Log()
             loggerMock.Verify(
                 x => x.Log(
                     LogLevel.Error,

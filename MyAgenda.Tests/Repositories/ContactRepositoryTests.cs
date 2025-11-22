@@ -9,7 +9,6 @@ namespace MyAgenda.Tests.Repositories
         [Fact]
         public async Task AddAsync_Should_Add_Contact_To_Context()
         {
-            // Arrange
             var context = DbContextInMemoryFactory.Create();
             var repository = new ContactRepository(context);
 
@@ -20,11 +19,9 @@ namespace MyAgenda.Tests.Repositories
                 Phone = "123456789"
             };
 
-            // Act
             await repository.AddAsync(contact);
             await repository.SaveChangesAsync();
 
-            // Assert
             Assert.Equal(1, await context.Contacts.CountAsync());
         }
 
@@ -38,10 +35,8 @@ namespace MyAgenda.Tests.Repositories
             context.Contacts.Add(new Contact { Name = "B", Email = "b@test.com", Phone = "222" });
             await context.SaveChangesAsync();
 
-            // Act
             var result = await repository.GetAllAsync();
 
-            // Assert
             Assert.Equal(2, result.Count());
         }
 
@@ -55,10 +50,8 @@ namespace MyAgenda.Tests.Repositories
             context.Contacts.Add(contact);
             await context.SaveChangesAsync();
 
-            // Act
             var result = await repository.GetByIdAsync(contact.Id);
 
-            // Assert
             Assert.NotNull(result);
             Assert.Equal("Ana", result!.Name);
         }
@@ -84,7 +77,6 @@ namespace MyAgenda.Tests.Repositories
             context.Contacts.Add(contact);
             await context.SaveChangesAsync();
 
-            // Update
             contact.Name = "Updated";
 
             await repository.UpdateAsync(contact);
