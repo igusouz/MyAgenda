@@ -17,14 +17,27 @@ const phone = ref("");
 
 const { createContact, updateContact } = useContacts();
 
-// Se for edição, preenche os campos
+function formatPhone(value) {
+  if (!value) return "";
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 7)
+    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function handlePhoneInput(e) {
+  phone.value = formatPhone(e.target.value);
+}
+
 watch(
   () => props.contact,
   (newVal) => {
     if (newVal) {
       name.value = newVal.name;
       email.value = newVal.email;
-      phone.value = newVal.phone;
+      phone.value = formatPhone(newVal.phone); 
     } else {
       name.value = "";
       email.value = "";
@@ -36,13 +49,27 @@ watch(
 
 const handleSubmit = async () => {
   try {
+    const rawPhone = phone.value.replace(/\D/g, ""); 
+
+    if (rawPhone.length !== 11) {
+      alert("O telefone deve conter 11 dígitos!");
+      return;
+    }
+
+    const payload = {
+      name: name.value,
+      email: email.value,
+      phone: rawPhone,
+    };
+
     if (props.contact && props.contact.id) {
-      await updateContact(props.contact.id, { name: name.value, email: email.value, phone: phone.value });
+      await updateContact(props.contact.id, payload);
       emit("updated");
     } else {
-      await createContact({ name: name.value, email: email.value, phone: phone.value });
+      await createContact(payload);
       emit("created");
     }
+
     emit("close");
   } catch (err) {
     console.error("Erro ao salvar contato:", err);
@@ -61,7 +88,7 @@ const handleSubmit = async () => {
       <form @submit.prevent="handleSubmit" class="space-y-4">
         <input
           v-model="name"
-          placeholder="Nome"
+          placeholder="Nome completo"
           class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
@@ -72,8 +99,9 @@ const handleSubmit = async () => {
           required
         />
         <input
-          v-model="phone"
-          placeholder="Telefone"
+          :value="phone"
+          @input="handlePhoneInput"
+          placeholder="(xx) xxxxx-xxxx"
           class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />

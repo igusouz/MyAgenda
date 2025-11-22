@@ -11,8 +11,8 @@ using MyAgenda.API.Infrastructure.Persistence;
 namespace MyAgenda.API.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    [Migration("20251122064521_SeedContacts")]
-    partial class SeedContacts
+    [Migration("20251122152830_SeedInitialContacts")]
+    partial class SeedInitialContacts
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace MyAgenda.API.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(30)
+                        .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -54,82 +54,82 @@ namespace MyAgenda.API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(156),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ana.silva@example.com",
                             Name = "Ana Silva",
-                            Phone = "(11) 98876-1234"
+                            Phone = "11988761234"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(158),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "bruno.santos@example.com",
                             Name = "Bruno Santos",
-                            Phone = "(21) 99745-6789"
+                            Phone = "21997456789"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(159),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "carla.almeida@example.com",
                             Name = "Carla Almeida",
-                            Phone = "(31) 98432-5566"
+                            Phone = "31984325566"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(160),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "diego.rodrigues@example.com",
                             Name = "Diego Rodrigues",
-                            Phone = "(41) 99123-7890"
+                            Phone = "41991237890"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(161),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "elaine.costa@example.com",
                             Name = "Elaine Costa",
-                            Phone = "(51) 98765-4321"
+                            Phone = "51987654321"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(162),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "fabio.mendes@example.com",
                             Name = "Fabio Mendes",
-                            Phone = "(71) 98123-4455"
+                            Phone = "71981234455"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(163),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gabriela.torres@example.com",
                             Name = "Gabriela Torres",
-                            Phone = "(81) 98654-7788"
+                            Phone = "81986547788"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(164),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "henrique.lima@example.com",
                             Name = "Henrique Lima",
-                            Phone = "(91) 98321-0099"
+                            Phone = "91983210099"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(165),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "isabela.martins@example.com",
                             Name = "Isabela Martins",
-                            Phone = "(62) 99234-5678"
+                            Phone = "62992345678"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 11, 22, 6, 45, 21, 549, DateTimeKind.Utc).AddTicks(166),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "joao.pereira@example.com",
                             Name = "João Pereira",
-                            Phone = "(85) 99543-2211"
+                            Phone = "85995432211"
                         });
                 });
 #pragma warning restore 612, 618

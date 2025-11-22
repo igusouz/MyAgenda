@@ -13,6 +13,14 @@ const emit = defineEmits(["edit", "deleted"]);
 
 const handleEdit = (contact) => emit("edit", contact);
 const handleDeleted = () => emit("deleted");
+
+const formatPhone = (phone) => {
+  if (!phone) return "";
+
+  const cleaned = phone.replace(/\D/g, "");
+
+  return cleaned.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+};
 </script>
 
 <template>
@@ -34,7 +42,7 @@ const handleDeleted = () => emit("deleted");
           <span class="font-medium">Email:</span> {{ contact.email }}
         </p>
         <p class="text-gray-700 text-sm">
-          <span class="font-medium">Telefone:</span> {{ contact.phone }}
+          <span class="font-medium">Telefone:</span> {{ formatPhone(contact.phone) }}
         </p>
       </div>
 
@@ -43,7 +51,7 @@ const handleDeleted = () => emit("deleted");
           @click="handleEdit(contact)"
           class="flex items-center px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm transition"
         >
-        Editar
+          Editar
         </button>
 
         <DeleteContactButton
