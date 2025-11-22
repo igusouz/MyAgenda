@@ -1,7 +1,6 @@
 # 📒 MyAgenda - .NET API with Vue.JS
 
-MyAgenda is a simple and efficient scheduling application designed to help users manage appointments, contacts, and daily tasks.
-This project was built with a modern full-stack architecture, using reliable and scalable technologies on both the backend and frontend.
+MyAgenda is a simple and efficient contactlist, where you can save your contacts with their most important information: Name, email and cellphone number.
 
 
 ### 🛠️ Technologies Used
